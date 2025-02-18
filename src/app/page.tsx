@@ -19,7 +19,7 @@ export default function Home() {
           <li className="mb-2 flex flex-row">
 					Estamos trabajando en nuestra página web <GrUserWorker className="ml-2" />
           </li>
-          <li>Si deseas contactarnos puedes hacer click aqui</li>
+          <li>Si deseas contactarnos podes hacer click acá</li>
         </ol>
 
         <div className="flex gap-4 items-center flex-col sm:flex-row">
