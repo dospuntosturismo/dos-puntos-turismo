@@ -9,9 +9,14 @@ export default {
   theme: {
     extend: {
       colors: {
+				'dos-puntos-brown-light': "#EBCD92",
+				'dos-puntos-yellow': "#DD9C2C",
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+			backgroundImage: {
+				'layout-pattern': "url('/fondo.jpeg')"
+			},
     },
   },
   plugins: [],
