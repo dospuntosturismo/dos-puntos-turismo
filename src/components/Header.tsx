@@ -5,7 +5,7 @@ import { Inter } from 'next/font/google'
 import Modal from './Modal'
 import { useIsMobile } from '@hooks/useIsDesktop'
 import { BsList } from 'react-icons/bs'
-import Link from 'next/link'
+// import Link from 'next/link'
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -44,7 +44,11 @@ const Header = () => {
 		{showMobileMenu && (
 				<div className='menu-mobile bg-dos-puntos-brown-light bg-opacity-60'>
 					<div className='flex flex-col items-center text-white font-roboto-bold'>
-						<Link href='/' className='p-2'>
+						<p className='p-2'>Inicio</p>
+						<p className='p-2'>Paquetes</p>
+						<p className='p-2'>Nosotros</p>
+						<div onClick={() => setOpenModal(true)} className='p-2'>Contacto</div>
+						{/* <Link href='/' className='p-2'>
 							Inicio
 						</Link>
 						<Link href='/nosotros' className='p-2'>
@@ -53,9 +57,9 @@ const Header = () => {
 						<Link href='/paquetes' className='p-2'>
 							Paquetes
 						</Link>
-						<Link href='/contacto' className='p-2' onClick={() => setOpenModal(true)}>
+						<Link href='/contacto' className='p-2' >
 							Contacto
-						</Link>
+						</Link> */}
 					</div>
 					<Modal isOpen={openModal} onClose={() => setOpenModal(false)} />
 				</div>
