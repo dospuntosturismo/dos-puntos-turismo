@@ -3,19 +3,17 @@
 
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
-import { AiOutlineWhatsApp } from 'react-icons/ai'
-import { Fredoka } from 'next/font/google'
 
-const fredoka = Fredoka({ subsets: ['latin'] });
+
 
 interface ModalProps {
   isOpen: boolean
   onClose: () => void
+	children: React.ReactNode
+	className?: string
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
-	const SIZE = '24px'
-	const COLOR = 'green'
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, className }) => {
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={onClose}>
@@ -42,32 +40,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-dos-puntos-pink text-white p-6 text-left align-middle shadow-xl transition-all">
-                <div className="flex flex-row mt-2">
-									<div className={`flex flex-col items-center justify-center ${fredoka.className}`}>
-									<div className='relative flex px-2 py-1 text-sm text-white bg-transparent border border-transparent rounded-md focus:outline-none'>
-										<AiOutlineWhatsApp className='mr-2' size={SIZE} color={COLOR} />
-										<a className='text-sm' target='_blank' rel="noreferrer" href='https://wa.me/5492994192754'>+54 9 299 419 2754</a>
-									</div>
-										<a href='mailto:info@dospuntosturismo.com.ar' className="text-sm text-center text-white">
-										info@dospuntosturismo.com.ar
-										</a>
-										<a className='text-sm' href='https://dospuntosturismo.com.ar'>www.dospuntosturismo.com.ar</a>
-									</div>
-									<div>
-										<img src='/logotipo_blanco.png' alt='Logo' />
-									</div>
-                </div>
-
-                <div className="mt-4">
-                  <button
-                    type="button"
-                    className="inline-flex justify-center rounded-md border border-transparent bg-dos-puntos-gray px-4 py-2 text-sm font-medium text-white"
-                    onClick={onClose}
-                  >
-                    Cerrar
-                  </button>
-                </div>
+              <Dialog.Panel className={`${className} w-full max-w-md transform overflow-hidden rounded-2xl p-6 text-left align-middle shadow-xl transition-all`}>
+                {children}
               </Dialog.Panel>
             </Transition.Child>
           </div>

@@ -1,0 +1,15 @@
+<svg viewBox="0 0 1440 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+  <!-- Fondo blanco -->
+  <rect x="0" y="0" width="1440" height="900" fill="#ffffff" />
+
+  <!-- Olas con nuevo color -->
+  <path fill="#B13463" d="
+    M0,520
+    C120,440 240,380 360,370
+    C520,358 640,400 740,418
+    C860,440 1000,470 1120,460
+    C1240,450 1360,420 1440,455
+    L1440,900
+    L0,900
+    Z" />
+</svg>

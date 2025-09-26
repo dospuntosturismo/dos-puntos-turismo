@@ -5,12 +5,12 @@
 
 @font-face {
 	font-family: 'BC Alphapipe';
-	src: url('/fonts/BC Alphapipe L Regular.ttf') format('ttf');
+	src: url('/fonts/BC Alphapipe RB Regular.ttf') format('ttf');
 	font-weight: normal;
 	font-style: normal;
 }
 
 .font-alphapipe {
 	font-family: 'BC Alphapipe';
-	font-weight: 400;
+	font-weight: 500;
 }
