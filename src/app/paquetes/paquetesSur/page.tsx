@@ -47,31 +47,31 @@ const handleModal = (paquete: Paquetes) => {
 		<div className='relative w-screen min-h-[100svh]'>
 			<img
     src="/olas-azul-oscuro.svg"
-    className="absolute bottom-60 left-0 w-full h-auto"
+    className="absolute bottom-52 md:bottom-60  left-0 w-full h-auto"
     alt="Fondo ola"
   />
 	<div className='relative z-10 flex flex-col items-center'>
 				<Header />
-			<div className='flex flex-row justify-around items-center w-full mt-10'>
-				<div className='flex flex-col'>
-					<div className={`text-3xl text-dos-puntos-gray ${fredoka.className}`}>
+			<div className='flex flex-col md:flex-row justify-around items-center w-full mt-10'>
+				<div className='flex flex-col mb-5 md:mb-0'>
+					<div className={`text-lg md:text-3xl text-dos-puntos-gray ${fredoka.className}`}>
 						¡Hora de
 					</div>
-					<div className={`text-2xl text-dos-puntos-gray font-bold ${alphapipeFont.className}`}>
+					<div className={`text-lg md:text-2xl text-dos-puntos-gray font-bold ${alphapipeFont.className}`}>
 						viajar al
 					</div>
-					<div className={`text-2xl text-dos-puntos-gray font-bold ${alphapipeFont.className}`}>
+					<div className={`text-lg md:text-2xl text-dos-puntos-gray font-bold ${alphapipeFont.className}`}>
 						SUR!
 					</div>
 				</div>
-				<div className='flex flex-col space-y-2 w-56'>
-					<div className='flex flex-row items-center justify-around'>
-						<Image src='/Elementos gráficos-02.png' alt='Elemento 1' width={40} height={40} />
-						<Image src='/Elementos gráficos-04.png' alt='Elemento 1' width={85} height={50} />
+				<div className='flex flex-row md:flex-col space-x-6 md:space-x-0 space-y-2 w-56'>
+					<div className='flex flex-row items-center space-x-6 md:space-x-0 justify-around'>
+						<Image src='/Elementos gráficos-02.png' alt='Elemento 1' width={40} height={40} className="h-10 w-auto" />
+						<Image src='/Elementos gráficos-04.png' alt='Elemento 1' width={85} height={50} className="h-8 w-auto" />
 					</div>
-					<div className='flex flex-row items-center justify-around'>
-						<Image src='/Elementos gráficos-05.png' alt='Elemento 1' width={50} height={40} />
-						<Image src='/Elementos gráficos-01.png' alt='Elemento 1' width={40} height={40} />
+					<div className='flex flex-row items-center space-x-6 md:space-x-0 justify-around'>
+						<Image src='/Elementos gráficos-05.png' alt='Elemento 1' width={50} height={40} className="h-8 w-auto" />
+						<Image src='/Elementos gráficos-01.png' alt='Elemento 1' width={40} height={40} className="h-8 w-auto" />
 					</div>
 				</div>
 			</div>

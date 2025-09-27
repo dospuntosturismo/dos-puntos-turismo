@@ -3,13 +3,12 @@ import React, { useState } from 'react'
 import localFont from 'next/font/local'
 import Image from 'next/image'
 import Header from '@components/Header'
-import { useForm } from 'react-hook-form'
-import { Fredoka } from 'next/font/google'
 import Footer from '@components/Footer'
 import Modal from '@components/Modal'
-const alphapipeFont = localFont({
-	src: '../../../public/fonts/BC Alphapipe RB Regular.ttf',
-})
+import { useForm } from 'react-hook-form'
+import { Fredoka } from 'next/font/google'
+
+const alphapipeFont = localFont({ src: '../../../public/fonts/BC Alphapipe RB Regular.ttf' })
 const fredoka = Fredoka({ subsets: ['latin'] })
 
 type ContactForm = {
@@ -21,90 +20,207 @@ type ContactForm = {
   comments: string
 }
 
+export default function Contacto() {
+  const [openModal, setOpenModal] = useState(false)
 
-const Contacto = () => {
-	const { handleSubmit, register, formState: { errors, isSubmitting } } = useForm<ContactForm>()
-	const [openModal, setOpenModal] = useState(false)
+  const {
+    handleSubmit,
+    register,
+    formState: { errors, isSubmitting },
+  } = useForm<ContactForm>({ mode: 'onTouched' })
 
-	const onSubmit =  handleSubmit(async (data) => {
-		try {
-			console.log('data', data)
-			const res = await fetch('/api/contact', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
-			})
-			const json = await res.json()
+      })
+      // A prueba de backends que no devuelven JSON o devuelven otro shape
+      const json = await res.json().catch(() => ({} as unknown))
+      if (!res.ok || (json && json.ok === false)) {
+        throw new Error(json?.message || json?.error || 'Ocurrió un error al enviar tu mensaje')
+      }
+      setOpenModal(true)
+    } catch (err: unknown) {
+      alert((err as Error)?.message ?? 'Error al enviar mensaje')
+    }
+  })
 
-			console.log('json', json)
+  const labelBase = `block text-white text-sm sm:text-base mb-1 ${fredoka.className}`
+  const inputBase =
+    'w-full bg-transparent border-b-2 border-white/80 text-white placeholder-white/60 focus:outline-none focus:border-white transition'
+  const inputError = 'border-red-300 focus:border-red-300'
+  const helpError = 'text-red-200 text-xs mt-1'
 
-			if(!res.ok || !json.ok) throw new Error(json.messagge || 'Ocurrió un error al enviar tu mensaje')
-				setOpenModal(true)
-		} catch (error: unknown) {
-			if (typeof error === 'object' && error !== null && 'message' in error) {
-				alert((error as { message?: string }).message || 'Error al enviar mensaje')
-			} else {
-				alert('Error al enviar mensaje')
-			}
-		}
-	})
+  return (
+    <>
+      <main className="w-full min-h-[100svh] bg-white relative">
+        <Header />
 
-	const styleInput = 'border-b-2 bg-transparent border-white w-10/12 text-white focus:outline-none'
-	const styleLabel = `${fredoka.className} text-lg self-start text-white ml-24 mb-6`
-	return (
-		<>
-		<div className='w-full h-screen flex flex-col items-center bg-white relative'>
-				<Header />
-				<div className='flex flex-col items-center w-9/12'>
-					<form onSubmit={onSubmit} className='w-full h-auto mt-10 mb-20 flex flex-col items-center justify-center bg-dos-puntos-blue rounded-lg p-6'>
-						<div className='flex flex-row items-center justify-center space-x-20 mb-20'>
-							<h1 className={`text-5xl ${alphapipeFont.className}`}>Hablemos</h1>
-							<Image src='/Elementos gráficos-01.png' alt='Elemento 1' width={80} height={80} />
-						</div>
-							<input type='text' className={styleInput} placeholder='' {...register('nombre')}/>
-							<label className={styleLabel}>
-							Nombre y apellido
-						</label>
-						<input type='text' className={styleInput} {...register('phone')} />
-						<label className={styleLabel}>Celular</label>
-						<div className='flex flex-row items-center justify-center space-x-4 w-full mx-10 mb-10'>
-							<div className='w-[40%]'>
-								<input type='text' className='border-b-2 bg-transparent border-white w-full text-white focus:outline-none' {...register('city')}/>
-								<label className={`${fredoka.className} text-lg self-start text-white`}>Ciudad</label>
-							</div>
-							<div className='w-[40%]'>
-								<input type='text' className='border-b-2 bg-transparent border-white w-full text-white focus:outline-none' {...register('pais')}/>
-								<label className={`${fredoka.className} text-lg self-start text-white`}>País</label>
-							</div>
-						</div>
-						<input type='text' className={styleInput} {...register('email')}/>
-						<label className={styleLabel}>Email</label>
-						{errors.email && <p className='text-red-200 -mt-5 mb-4'>{errors.email.message}</p>}
-						<textarea {...register('comments')} className='border border-white w-10/12 h-20 mt-6 bg-transparent p-2 text-white' />
-						<label className={`${fredoka.className} text-lg self-start text-white ml-24`}>Contacto</label>
-						{errors.comments && <p className='text-red-200 mt-2'>{errors.comments.message}</p>}
-						<div className='flex items-center justify-center'>
-							<button type='submit' 
-							disabled={isSubmitting}
-							className={`px-6 py-2 text-white border border-white ${fredoka.className} disabled:opacity-60`}>
-								{isSubmitting ? 'Enviando…' : 'Enviar'}
-								</button>
-						</div>
-					</form>
-				</div>
-				<Footer />
-				</div>
-				<Modal isOpen={openModal} className='bg-dos-puntos-blue' onClose={() => setOpenModal(false)}>
-					<div className='flex flex-row items-center justify-center space-x-4'>
-					<h1 className={`${alphapipeFont.className} text-4xl`}>Te respondemos <br/> a la brevedad</h1>
-					<Image src='/Elementos gráficos-01.png' alt='Elemento 1' width={100} height={100} />
-					</div>
-					<div className='mt-4 flex items-center justify-center'>
-						<button type='button' className='text-white px-4 py-2 border border-white' onClick={() => setOpenModal(false)}>Cerrar</button>
-					</div>
-					</Modal>
-			</>
-	)
+        <div className="mx-auto w-full max-w-3xl md:max-w-5xl px-4 sm:px-6 md:px-8 pt-28 pb-16">
+          <form
+            onSubmit={onSubmit}
+            className="w-full bg-dos-puntos-blue text-white rounded-2xl p-5 sm:p-8 md:p-10 shadow-md"
+            noValidate
+          >
+            {/* Título */}
+            <div className="flex items-center justify-between gap-4 mb-8">
+              <h1 className={`text-3xl sm:text-4xl md:text-5xl ${alphapipeFont.className}`}>Hablemos</h1>
+              <Image
+                src="/Elementos gráficos-01.png"
+                alt="Elemento decorativo"
+                width={80}
+                height={80}
+                className="w-12 sm:w-16 h-auto"
+                sizes="(max-width: 640px) 48px, 64px"
+              />
+            </div>
+
+            {/* Nombre */}
+            <div className="mb-6">
+              <label htmlFor="nombre" className={labelBase}>
+                Nombre y apellido *
+              </label>
+              <input
+                id="nombre"
+                type="text"
+                autoComplete="name"
+                className={`${inputBase} ${errors.nombre ? inputError : ''}`}
+                aria-invalid={!!errors.nombre}
+                {...register('nombre', {
+                  required: 'Ingresá tu nombre y apellido',
+                  minLength: { value: 2, message: 'Demasiado corto' },
+                })}
+              />
+              {errors.nombre && <p className={helpError}>{errors.nombre.message}</p>}
+            </div>
+
+            {/* Teléfono */}
+            <div className="mb-6">
+              <label htmlFor="phone" className={labelBase}>
+                Celular
+              </label>
+              <input
+                id="phone"
+                type="tel"
+                inputMode="tel"
+                autoComplete="tel"
+                className={inputBase}
+                placeholder="+54 9 ..."
+                {...register('phone', {
+                  pattern: { value: /^[\d+()\s-]{6,20}$/, message: 'Teléfono no válido' },
+                })}
+              />
+              {errors.phone && <p className={helpError}>{errors.phone.message}</p>}
+            </div>
+
+            {/* Ciudad / País */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+              <div>
+                <label htmlFor="city" className={labelBase}>
+                  Ciudad
+                </label>
+                <input
+                  id="city"
+                  type="text"
+                  autoComplete="address-level2"
+                  className={inputBase}
+                  {...register('city')}
+                />
+              </div>
+              <div>
+                <label htmlFor="pais" className={labelBase}>
+                  País
+                </label>
+                <input
+                  id="pais"
+                  type="text"
+                  autoComplete="country-name"
+                  className={inputBase}
+                  {...register('pais')}
+                />
+              </div>
+            </div>
+
+            {/* Email */}
+            <div className="mb-6">
+              <label htmlFor="email" className={labelBase}>
+                Email *
+              </label>
+              <input
+                id="email"
+                type="email"
+                autoComplete="email"
+                className={`${inputBase} ${errors.email ? inputError : ''}`}
+                aria-invalid={!!errors.email}
+                {...register('email', {
+                  required: 'Ingresá tu email',
+                  pattern: {
+                    value:
+                      /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: 'Email no válido',
+                  },
+                })}
+              />
+              {errors.email && <p className={helpError}>{errors.email.message}</p>}
+            </div>
+
+            {/* Comentarios */}
+            <div className="mb-8">
+              <label htmlFor="comments" className={labelBase}>
+                Mensaje *
+              </label>
+              <textarea
+                id="comments"
+                rows={4}
+                className={`w-full bg-transparent border-2 border-white/80 rounded-md p-3 text-white placeholder-white/60 focus:outline-none focus:border-white transition ${
+                  errors.comments ? inputError : ''
+                }`}
+                aria-invalid={!!errors.comments}
+                placeholder="Contanos qué estás buscando…"
+                {...register('comments', {
+                  required: 'Dejanos tu mensaje',
+                  minLength: { value: 5, message: 'Contanos un poco más :)' },
+                })}
+              />
+              {errors.comments && <p className={helpError}>{errors.comments.message}</p>}
+            </div>
+
+            {/* Submit */}
+            <div className="flex items-center justify-center">
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className={`inline-flex items-center justify-center px-6 py-2 border border-white rounded-xl ${fredoka.className} disabled:opacity-60 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-white`}
+              >
+                {isSubmitting ? 'Enviando…' : 'Enviar'}
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <Footer />
+      </main>
+
+      {/* Modal de éxito */}
+      <Modal isOpen={openModal} className="bg-dos-puntos-blue" onClose={() => setOpenModal(false)}>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <h2 className={`${alphapipeFont.className} text-2xl sm:text-4xl text-center`}>
+            ¡Gracias! <br /> Te respondemos a la brevedad
+          </h2>
+          <Image src="/Elementos gráficos-01.png" alt="Elemento" width={100} height={100} />
+        </div>
+        <div className="mt-4 flex items-center justify-center">
+          <button
+            type="button"
+            className="text-white px-4 py-2 border border-white rounded-md"
+            onClick={() => setOpenModal(false)}
+          >
+            Cerrar
+          </button>
+        </div>
+      </Modal>
+    </>
+  )
 }
-
-export default Contacto
