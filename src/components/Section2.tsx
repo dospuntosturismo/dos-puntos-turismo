@@ -62,26 +62,26 @@ export default function Section2() {
               src="/Elementos gráficos-03.png"
               alt=""
               aria-hidden
-              width={30}
-              height={30}
-              className="h-6 sm:h-7 md:h-8 w-auto"
+              width={70}
+              height={60}
+              className="h-10 sm:h-7 md:h-8 w-auto"
               sizes="(max-width: 640px) 40px, (max-width: 768px) 48px, 56px"
             />
             <Image
               src="/Elementos gráficos-04.png"
               alt=""
               aria-hidden
-              width={70}
+              width={60}
               height={50}
-              className="h-8 sm:h-10 md:h-12 w-auto"
+              className="h-7 sm:h-10 md:h-12 w-auto"
               sizes="(max-width: 640px) 64px, (max-width: 768px) 80px, 96px"
             />
             <Image
               src="/Elementos gráficos-02.png"
               alt=""
               aria-hidden
-              width={30}
-              height={30}
+              width={60}
+              height={60}
               className="h-6 sm:h-7 md:h-8 w-auto"
               sizes="(max-width: 640px) 40px, (max-width: 768px) 48px, 56px"
             />
@@ -89,7 +89,7 @@ export default function Section2() {
               src="/Elementos gráficos-01.png"
               alt=""
               aria-hidden
-              width={30}
+              width={60}
               height={30}
               className="h-6 sm:h-7 md:h-8 w-auto"
               sizes="(max-width: 640px) 40px, (max-width: 768px) 48px, 56px"

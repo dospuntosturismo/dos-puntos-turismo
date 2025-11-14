@@ -27,7 +27,7 @@ export default function Section1() {
       style={{ WebkitTapHighlightColor: "transparent" }}
     >
       {/* Header fijo arriba si tu header es transparente sobre el fondo */}
-      <div className="absolute inset-x-0 top-0 z-20">
+      <div className="absolute inset-x-0 top-0 mx-5 z-20">
         <Header />
       </div>
 

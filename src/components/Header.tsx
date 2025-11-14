@@ -60,7 +60,7 @@ const Header = () => {
   return (
     <>
       {/* Barra */}
-      <div className="flex flex-row justify-between items-center bg-dos-puntos-brown-light/65 px-2 w-11/12 rounded-full mt-10 shadow-lg ml-6 md:ml-0">
+      <div className="flex flex-row justify-between items-center bg-dos-puntos-brown-light/65 px-2 w-full rounded-full mt-10 shadow-lg md:ml-0">
         <div className="py-1 pl-2">
           <Image src="/logo_inicio.png" alt="Logo Nav Bar" width={100} height={100} />
         </div>
@@ -106,7 +106,9 @@ const Header = () => {
                   </ul>
                 )}
               </li>
-
+              <a href='https://experiencias.dospuntosturismo.com.ar' target='_blank' rel='noreferrer' className="px-4 py-2">
+                Experiencias
+              </a>
               <Link href="/contacto" className="border border-gray-900 rounded-full px-3 py-1 cursor-pointer">
                 Contacto
               </Link>
@@ -171,7 +173,9 @@ const Header = () => {
                   </div>
                 </div>
               </div>
-
+              <a href='https://experiencias.dospuntosturismo.com.ar' target='_blank' rel='noreferrer' className="p-2 rounded-lg hover:bg-white/10 text-sm">
+                Experiencias
+              </a>
               <Link href="/contacto" className="p-3 rounded-xl hover:bg-white/10" role="menuitem" onClick={closeMobileMenu}>
                 Contacto
               </Link>
