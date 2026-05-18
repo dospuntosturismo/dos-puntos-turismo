@@ -84,6 +84,7 @@ const Carrousel = () => {
               <div key={index} className="keen-slider__slide">
                 <div className="rounded-xl overflow-hidden shadow-md relative bg-white">
                   <Image
+                  unoptimized
                     src={item.image}
                     alt={item.nombre}
                     width={400}

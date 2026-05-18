@@ -92,6 +92,7 @@ const handleModal = (paquete: Paquetes) => {
                   >
                     <div className="relative w-full aspect-square">
                       <Image
+                      unoptimized
                         src={paquete.image}
                         alt={paquete.titulo}
                         fill
