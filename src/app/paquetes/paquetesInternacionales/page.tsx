@@ -27,7 +27,6 @@ const PaquetesInter = () => {
       .select('*')
       .like('paquete', '4')// busca registros donde el campo 'paquete' contiene el string "1"
 
-    console.log('dataaaaaa', data)
 		const filtrados = data?.filter(p => p.paquete === '4')
 		console.log('FILTRADOS:', filtrados)
     if (error) console.error(error)
@@ -42,7 +41,6 @@ const handleModal = (paquete: Paquetes) => {
 	setOpenModal(true)
 }
 
-	console.log('paquetes', paquetesList)
 	return (
 		<div className='relative w-screen min-h-[100svh]'>
 			<img

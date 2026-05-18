@@ -57,6 +57,8 @@ const Carrousel = () => {
     const fetchSalidas = async () => {
       const { data, error } = await supabase.from('salidas').select('*')
       if (error) console.error(error)
+
+        console.log('Salidas obtenidas:', data) // Verifica los datos obtenidos
       setSalidas(data || [])
       setLoading(false)
     }
