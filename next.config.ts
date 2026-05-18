@@ -7,7 +7,6 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "fbeykowmbjsqrqltiyno.supabase.co",
-        pathname: "/storage/v1/object/public/dospuntosbucket/admin/**",
       },
     ],
   }
