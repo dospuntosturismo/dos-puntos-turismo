@@ -94,7 +94,6 @@ const handleModal = (paquete: Paquetes) => {
                       <img
                         src={paquete.image}
                         alt={paquete.titulo}
-                        fill
                         className="object-contain p-4"
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       />
