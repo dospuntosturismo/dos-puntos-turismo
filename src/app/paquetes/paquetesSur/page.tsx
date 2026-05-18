@@ -78,7 +78,7 @@ const handleModal = (paquete: Paquetes) => {
 			<div className='flex flex-row items-center justify-center space-x-6 my-10'>
 							{paquetesList.map((paquete) => (
 								<button type='button' key={paquete.id} onClick={() =>handleModal(paquete)} className='bg-gray-500 w-80 h-80 py-4 px-2 flex items-center justify-center cursor-pointer'>
-								<Image unoptimized src={paquete.image} width={250} height={250} alt={paquete.titulo} />
+								<img src={paquete.image} width={250} height={250} alt={paquete.titulo} />
 								</button>
 							))}
 						</div>

@@ -91,8 +91,7 @@ const handleModal = (paquete: Paquetes) => {
                     aria-label={`Abrir ${paquete.titulo}`}
                   >
                     <div className="relative w-full aspect-square">
-                      <Image
-                      unoptimized
+                      <img
                         src={paquete.image}
                         alt={paquete.titulo}
                         fill
