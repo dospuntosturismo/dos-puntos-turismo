@@ -6,8 +6,13 @@ export interface Salidas {
 }
 
 export interface Paquetes {
-	id: string
-	titulo: string
-	image: string
-	paquete: string 
+    id: string;
+	title: string;
+    price: number;
+    duration: string;
+    location: string;
+    info: string;
+    image: string;
+    imageInfo: string;
+    paquete: string;
 }

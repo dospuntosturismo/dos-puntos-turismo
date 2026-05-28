@@ -8,6 +8,7 @@ import Header from '@components/Header'
 import { Paquetes } from 'types/global'
 import Footer from '@components/Footer'
 import ModalMenu from '@components/ModalMenu'
+import Card from '@components/Card'
 
 const fredoka = Fredoka({ subsets: ['latin'] })
 
@@ -23,7 +24,7 @@ const PaquetesSur = () => {
 	useEffect(() => {
   const fetchPaquetes = async () => {
     const { data, error } = await supabase
-      .from('paquetes')
+      .from('packages')
       .select('*')
       .like('paquete', '2')// busca registros donde el campo 'paquete' contiene el string "1"
 
@@ -75,13 +76,14 @@ const handleModal = (paquete: Paquetes) => {
 					</div>
 				</div>
 			</div>
-			<div className='flex flex-row items-center justify-center space-x-6 my-10'>
-							{paquetesList.map((paquete) => (
-								<button type='button' key={paquete.id} onClick={() =>handleModal(paquete)} className='bg-gray-500 w-80 h-80 py-4 px-2 flex items-center justify-center cursor-pointer'>
-								<img src={paquete.image} width={250} height={250} alt={paquete.titulo} />
-								</button>
-							))}
-						</div>
+			 {/* Grid de paquetes */}
+          <section className="mt-8 sm:mt-10">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+              {paquetesList.map((item) => (
+                <Card key={item.id} onClick={() => handleModal(item)} title={item.title} image={item.image} price={item.price} duration={item.duration} location={item.location} info={item.info} />
+              ))}
+            </ul>
+          </section>
 						<Footer />
 						{openModal && (
 				<ModalMenu
